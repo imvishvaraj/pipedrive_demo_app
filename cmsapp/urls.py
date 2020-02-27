@@ -29,5 +29,4 @@ urlpatterns = [
     path('accounts/register/', register_view, name='register'),
     path('accounts/logout/', logout_view, name='logout'),
     path('new_customer/', dv.new_customer, name='new_customer'),
-    path('delete_customer/<int:id>/', dv.delete_customer, name='delete_customer'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
