@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block content %}
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Add New Customer</h1>
+<!--            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
+          </div>
+
+          <!-- Content Row -->
+          <div class="row">
+
+            <!-- Customers and products -->
+            <div class="container-fluid">
+
+                <form action="{% url 'new_customer' %}" method="POST">
+                    {% csrf_token %}
+
+                    {% for hidden_field in form.hidden_fields %}
+                        {{ hidden_field }}
+                    {% endfor %}
+
+                    {% for field in form.visible_fields %}
+                        <div class="form-group">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                        </div>
+
+                    {% endfor %}
+                    <button type="submit">Submit</button>
+
+<!--                    <a href="{% url 'home' %}" class="save btn btn-default">-->
+<!--                      Save-->
+<!--                    </a>-->
+
+
+                  </form>
+
+            </div>
+
+            <!-- Pie Chart -->
+            <div class="col-xl-4 col-lg-5">
+            </div>
+
+          </div>
+          </div>
+        </div>
+
+{% endblock %}
