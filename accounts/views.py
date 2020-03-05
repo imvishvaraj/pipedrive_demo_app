@@ -46,6 +46,7 @@ class Register(View):
         next = request.GET.get('next')
         form = UserRegistrationForm(request.POST or None)
         if form.is_valid():
+            print("inside registration")
             user = form.save(commit=False)
             password = form.cleaned_data.get('password')
             user.set_password(password)
