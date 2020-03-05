@@ -1,4 +1,3 @@
-from .models import Pipedrive as pc
 import requests
 
 PIPEDRIVE_API_KEY = "API KEY"
@@ -15,7 +14,7 @@ def get_data(url, headers):
         return None
 
 
-class Person:
+class PPerson:
     """Implementing operations reagrding person/contact on pipedrive."""
 
     def __init__(self, key):
@@ -25,7 +24,7 @@ class Person:
     def get_all(self):
         url = "https://api.pipedrive.com/v1/persons?start=0&api_token={}".format(self.key)
         # url = "/".join([self.domain, 'persons'])
-        data = get_data(url, self.headers)
+        data = get_data(url, self.headers)['data']
         return data
 
     def get_details(self, id):
@@ -34,7 +33,7 @@ class Person:
         return data
 
 
-class Deals:
+class PDeals:
     """Implementing function regarding"""
 
     def __init__(self, key):

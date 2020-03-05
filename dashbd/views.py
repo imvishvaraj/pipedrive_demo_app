@@ -63,7 +63,11 @@ class Customer(View):
 
 class PipeDriveSettings(View):
     def get(self, request):
-        key = PDKey.objects.all().get()
+        try:
+            key = PDKey.objects.all().get()
+        except:
+            key = None
+
         form = PipedriveKey()
         context = {
             'form': form,
