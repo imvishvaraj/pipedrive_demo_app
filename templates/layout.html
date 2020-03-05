@@ -48,7 +48,7 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
         <li class="nav-item active">
-          <a class="nav-link" href="{% url 'new_customer' %}">
+          <a class="nav-link" href="{% url 'customer' %}">
             <span>Add New Customer</span></a>
         </li>
       <!-- Heading -->
@@ -102,6 +102,7 @@
                   </li> -->
 
                   <li class="nav-item">
+                    <a class="nav-link mr-2 d-none d-lg-inline text-gray-600 small" href="{% url 'settings' %}">Settings</a>
                     <a class="nav-link mr-2 d-none d-lg-inline text-gray-600 small" href="{% url 'logout' %}">Logout</a>
                   </li>
                 </ul>
