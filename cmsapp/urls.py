@@ -18,15 +18,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-import dashbd.views as dv
-from accounts.views import login_view, register_view, logout_view
+from dashbd.views import Home, Customer
+from accounts.views import Login, Logout, Register
 
 
 urlpatterns = [
-    path('', dv.home, name='home'),
+    path('', Home.as_view, name='home'),
     path('admin/', admin.site.urls),
-    path('accounts/login/', login_view, name='login'),
-    path('accounts/register/', register_view, name='register'),
-    path('accounts/logout/', logout_view, name='logout'),
-    path('new_customer/', dv.new_customer, name='new_customer'),
+    path('accounts/login/', Login.as_view, name='login'),
+    path('accounts/register/', Register.as_view, name='register'),
+    path('accounts/logout/', Logout.as_view, name='logout'),
+    path('new_customer/', Customer.as_view, name='customer'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
