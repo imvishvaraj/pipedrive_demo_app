@@ -4,31 +4,33 @@ from django.contrib.auth.decorators import login_required
 
 from pipedrive.client import Client
 from .forms import NewCustomer, PipedriveKey
-from .models import Pipedrive
+from .models import PDKey, Persons, Deals
 
-client = Client(domain="https://digital-dirt.pipedrive.com/")
-client.set_api_token("89b7790a4d20c41fada19ce175955c4e3572d188")
+# client = Client(domain="https://digital-dirt.pipedrive.com/")
+# client.set_api_token("89b7790a4d20c41fada19ce175955c4e3572d188")
 
 @login_required
 def hm(request):
-    persons = client.persons.get_all_persons()['data']
-    products = client.products.get_all_products()['data']
+    # persons = client.persons.get_all_persons()['data']
+    # products = client.products.get_all_products()['data']
+    persons = Persons.objects.all()
+    deals = Deals.objects.all()
 
     context = {
         'persons': persons,
-        'products': products
+        'deals': deals
     }
     return render(request, 'index.html', context)
 
 class Home(View):
     @login_required
     def get(self, request):
-        persons = client.persons.get_all_persons()['data']
-        products = client.products.get_all_products()['data']
+        persons = Persons.objects.all()
+        deals = Deals.objects.all()
 
         context = {
             'persons': persons,
-            'products': products
+            'deals': deals
         }
         return render(request, 'index.html', context)
 
@@ -52,14 +54,16 @@ class Customer(View):
                 'email': email,
                 'phone': phone
             }
-        response = client.persons.create_person(data)
+        # response = client.persons.create_person(data)
+        person = Persons(name=name)
+        person.save()
 
         return redirect('home')
 
 
 class PipeDriveSettings(View):
     def get(self, request):
-        key = Pipedrive.objects.all().get()
+        key = PDKey.objects.all().get()
         form = PipedriveKey()
         context = {
             'form': form,
@@ -75,7 +79,7 @@ class PipeDriveSettings(View):
             data = {
                 'key': key
             }
-        pkey = Pipedrive(key=key)
+        pkey = PDKey(key=key)
         pkey.save()
 
         return redirect('home')
