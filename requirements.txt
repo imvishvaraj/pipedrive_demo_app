@@ -3,7 +3,7 @@ certifi==2019.11.28
 chardet==3.0.4
 Django==3.0.3
 django-pipedrive==0.1.14
-httplib2==0.17.0
+httplib2==0.18.0
 idna==2.9
 pipedrive-python-lib==1.1.2
 pytz==2019.3
